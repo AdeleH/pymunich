@@ -5,7 +5,11 @@ from IPython.display import display, clear_output, HTML
 import time
 
 class GameOfLife:
-    ''' This class uses Nympy library. '''        
+    ''' This class uses:
+    - numpy library for the representation of the grid,
+    - time for the simulation,
+    - IPython for the visualization / interface.
+    '''        
         
     def __init__(self, rows, cols):
         self.grid = np.random.random_integers(0, 1, size=(rows, cols))
@@ -19,6 +23,7 @@ class GameOfLife:
         return 0
             
     def nextgen(self, cells):
+    ''' It calculates the next iteration. '''
         res = cells*0 # copy of the array
         for row in range(cells.shape[0]):
             for col in range(cells.shape[1]):
@@ -28,11 +33,10 @@ class GameOfLife:
         return res
     
     def custom(self, grid, oldGrid):
+    ''' Display the grid. '''
         lightgray = ("<td style='border: 1px solid black; background: lightgray;"
                  "width: 1px; height: 1px'></td>")
         darkgray = ("<td style='border: 1px solid black; background: darkgrey;"
-                 "width: 1px; height: 1px'></td>")
-        gray = ("<td style='border: 1px solid black; background: gray;"
                  "width: 1px; height: 1px'></td>")
         black = ("<td style='border: 1px solid black; background: black;"
                  "width: 1px; height: 1px'></td>")
@@ -53,6 +57,7 @@ class GameOfLife:
         display(HTML("<table>{table}</table>".format(table=table)))
         
     def play(self, iterations):
+    ''' Animation '''
         arr = self.grid # initialization
         for i in range(0, iterations):
             tmp = self.nextgen(arr)
